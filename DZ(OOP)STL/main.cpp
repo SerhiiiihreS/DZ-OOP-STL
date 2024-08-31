@@ -1,32 +1,97 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
 class Student
 {
     string name;
     string surname;
-    int k;
+    int course;
     friend ostream& operator<<(ostream& os, Student& obj);
+public:
+    Student()=default;
+    Student( string nm);
+    Student(string nm, string snm);
+    Student(string nm, string snm, int crs);
+    const string Getname();
+    
+
+
+
+
 
 };
 ostream& operator<<(ostream& os, Student& obj)
 {
-    os << obj.name << endl;
-    os << obj.surname << endl;
-    os << obj.k << endl;
+    os << obj.name <<","<< obj.surname << ","<<obj.course << endl; 
+    return os;
 }
-void main()
+
+void Customfilling(int sd)
 {
-    Student a;
+    
+    char ch[10];
+    for (int i = 0; i < sd; i++) {
+        ch[i] = rand()%20;
+    } 
 
-    vector<Student> Group{ a };
+    for (int i = 0; i < sd; i++) {
+        cout << ch[i] << ",";
+    }
+    cout << endl;
 
-    for (auto pt = Group.begin(); pt != Group.end(); pt++)
+} 
+void PrintV(vector<Student> gr) {
+
+    for (auto pt = gr.begin(); pt != gr.end(); pt++)
     {
         cout << *pt << endl;
+
     }
 
+ }
 
+void main()
+{
+
+    srand(time(0));
+    Student a("Bil","Feljhjd",5);
+    Student b("Dsvb", "Tbtgr", 1);
+    Student c("Cgxgr", "Iloluilui", 2);
+    Student d("Abuthj", "Gcdf", 2);
+    Student e("Utgr", "Dgbtr", 3);
+    Student f("Eqsr", "Mgrytr", 4);
+
+    vector<Student> Group{ a,b,c,d,e,f };
+
+    PrintV(Group);
+    cout << "_______________________________________________";
+    sort(Group.begin(), Group.end()); 
+    PrintV(Group); 
 
 }
+
+Student::Student( string nm)
+{
+    name = nm;
+}
+
+Student::Student(string nm, string snm):Student(nm)
+{
+    surname = snm;
+}
+
+Student::Student(string nm, string snm, int crs):Student(nm,snm)
+{
+    course = crs;
+}
+
+const string Student::Getname() 
+{
+    return name;
+} 
+
+
+
