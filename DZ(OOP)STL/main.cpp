@@ -6,18 +6,19 @@ using namespace std;
 
 class Student
 {
-    string name;
-    string surname;
-    int course;
+    
     friend ostream& operator<<(ostream& os, Student& obj);
 public:
+    string name; 
+    string surname; 
+    int course; 
+
     Student()=default;
     Student( string nm);
     Student(string nm, string snm);
     Student(string nm, string snm, int crs);
-    const string Getname();
     
-
+    
 
 
 
@@ -29,20 +30,6 @@ ostream& operator<<(ostream& os, Student& obj)
     return os;
 }
 
-void Customfilling(int sd)
-{
-    
-    char ch[10];
-    for (int i = 0; i < sd; i++) {
-        ch[i] = rand()%20;
-    } 
-
-    for (int i = 0; i < sd; i++) {
-        cout << ch[i] << ",";
-    }
-    cout << endl;
-
-} 
 void PrintV(vector<Student> gr) {
 
     for (auto pt = gr.begin(); pt != gr.end(); pt++)
@@ -52,6 +39,16 @@ void PrintV(vector<Student> gr) {
     }
 
  }
+
+void PrintVV(vector<Student> gr) {
+
+    for (int i = 0; i <3; i++)
+    {
+        cout << gr[i] << endl;
+
+    }
+
+}
 
 void main()
 {
@@ -67,10 +64,24 @@ void main()
     vector<Student> Group{ a,b,c,d,e,f };
 
     PrintV(Group);
-    cout << "_______________________________________________";
-    sort(Group.begin(), Group.end()); 
+    cout << "_______________________________________________"<<endl;
+    sort(Group.begin(), Group.end(), [](Student& a, Student& b) {
+        return a.name < b.name;
+        });
+    cout << "_______________________________________________" << endl; 
     PrintV(Group); 
 
+    sort(Group.begin(), Group.end(), [](Student& a, Student& b) {
+        return a.surname < b.surname;
+        });
+    cout << "_______________________________________________" << endl; 
+    PrintV(Group);
+
+    sort(Group.begin(), Group.end(), [](Student& a, Student& b) {
+        return a.course < b.course;
+        });
+    cout << "_______________________________________________" << endl;
+    PrintVV(Group);
 }
 
 Student::Student( string nm)
@@ -88,10 +99,6 @@ Student::Student(string nm, string snm, int crs):Student(nm,snm)
     course = crs;
 }
 
-const string Student::Getname() 
-{
-    return name;
-} 
 
 
 
